@@ -1,6 +1,36 @@
 #include "gpio.h"
 
-/* */
+/*
+    * List GPIO available *
+
+    GPIO_PIN_0
+    GPIO_PIN_1
+    GPIO_PIN_2
+    GPIO_PIN_3
+    GPIO_PIN_4
+    GPIO_PIN_5
+    GPIO_PIN_6
+    GPIO_PIN_7
+    GPIO_PIN_8
+    GPIO_PIN_9
+    GPIO_PIN_10
+    GPIO_PIN_11
+    GPIO_PIN_12
+    GPIO_PIN_13
+    GPIO_PIN_14
+    GPIO_PIN_15
+
+    * List PORT available *
+
+    - GPIOA with 16 pins
+    - GPIOB with 16 pins
+    - GPIOC with 16 pins
+    - GPIOD with 16 pins
+    - GPIOE with 16 pins
+    - GPIOH with 1 pin
+*/
+
+/* Enable clock for PORTA */
 void enable_clock_port_a() {
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -8,7 +38,7 @@ void enable_clock_port_a() {
     return;
 }
 
-/* */
+/* Enable clock for PORTB */
 void enable_clock_port_b() {
 
     __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -16,7 +46,7 @@ void enable_clock_port_b() {
     return;
 }
 
-/* */
+/* Enable clock for PORTC */
 void enable_clock_port_c() {
 
     __HAL_RCC_GPIOC_CLK_ENABLE();
@@ -24,58 +54,49 @@ void enable_clock_port_c() {
     return;
 }
 
-int init_configure_pin_port_a(uint16_t gpio) {
+/* Configure GPIOx */
+void init_configure_gpio_port(port p, uint16_t gpio_num, uint8_t mode, uint8_t pull_mode, uint8_t speed_mode) {
 
-    GPIO_InitTypeDef gpio_struct;
+    GPIO_InitTypeDef gpio;
 
-    memset(&gpio_struct, 0, sizeof(gpio_struct));
+    memset(&gpio, 0, sizeof(gpio));
+    gpio.Pin = gpio_num;
+    gpio.Mode = mode;
+    gpio.Pull = pull_mode;
+    gpio.Speed = speed_mode;
 
-    gpio_struct.Pin = gpio;
-    gpio_struct.Mode = mode;
-    gpio_struct.Pull = pull;
-    gpio_struct.Speed = speed;
+    HAL_GPIO_Init(p, &gpio);
 
-    HAL_GPIO_Init(GPIOA, &gpio_struct);
-
-    return 0;
+    return;
 }
 
-int init_configure_pin_port_b(uint16_t gpio, uint32_t mode, uint32_t pull, uint32_t speed) {
+void set_high_gpio_level(port p, uint16_t gpio_num) {
 
-    GPIO_InitTypeDef gpio_struct;
+    HAL_GPIO_WritePin(p, gpio_num, GPIO_PIN_SET);
 
-    memset(&gpio_struct, 0, sizeof(gpio_struct));
-
-    gpio_struct.Pin = gpio;
-    gpio_struct.Mode = mode;
-    gpio_struct.Pull = pull;
-    gpio_struct.Speed = speed;
-
-    HAL_GPIO_Init(GPIOB, &gpio_struct);
-
-    return 0;
+    return;
 }
 
-int init_configure_pin_port_c(uint16_t gpio) {
+void set_low_gpio_level(port p, uint16_t gpio_num) {
 
+    HAL_GPIO_WritePin(p, gpio_num, GPIO_PIN_RESET);
 
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    return;
+}
 
-    GPIO_InitStruct.Pin = gpio;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP; // Output Push-Pull
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+uint8_t get_gpio_level(port p, uint16_t gpio_num) {
 
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    return HAL_GPIO_ReadPin(p, gpio_num);
+}
 
-    return 0;
+void toggle_gpio_level(port p, uint16_t gpio_num) {
+
+    HAL_GPIO_TogglePin(p, gpio_num);
+
+    return;
 }
 
 
-HAL_GPIO_WritePin(GPIOx, GPIO_PIN_x, GPIO_PIN_SET);   // Imposta il pin a livello alto
-HAL_GPIO_WritePin(GPIOx, GPIO_PIN_x, GPIO_PIN_RESET); // Imposta il pin a livello basso
 
 
-GPIO_PinState state = HAL_GPIO_ReadPin(GPIOx, GPIO_PIN_x);
 
-HAL_GPIO_TogglePin(GPIOx, GPIO_PIN_x);

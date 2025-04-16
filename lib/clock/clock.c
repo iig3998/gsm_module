@@ -88,9 +88,7 @@ void config_source_clock(uint32_t freq_in, uint8_t source_clock, uint8_t m, uint
     }
     
     /* Set configuration */
-    if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-        Error_Handler();
-    }
+    assert(HAL_RCC_OscConfig(&RCC_OscInitStruct) == HAL_OK);
 
     return;
 }
@@ -109,9 +107,7 @@ void config_system_clock(uint8_t sys_clock_source, uint32_t ahb_prescaler, uint3
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;         /* APB1 prescaler */
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;         /* APB2 prescaler */
 
-    if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
-        Error_Handler();
-    }
+    assert(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) == HAL_OK);
 
     return;
 }

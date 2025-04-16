@@ -2,7 +2,17 @@
 #include <stdint.h>
 #include <assert.h>
 #include <string.h>
+
+#include <stm32f4xx_hal.h>
+#include <stm32f4xx_hal_rcc.h>
+#include <stm32f4xx_hal_rcc_ex.h>
+#include <stm32f4xx_hal_pwr.h>
+#include <stm32f4xx_hal_flash.h>
+
 #include "clock.h"
+
+// PA8 -> MC01
+// PA9 -> MC02
 
 /* Configure source clock */
 void config_source_clock(uint32_t freq_in, uint8_t source_clock, uint8_t m, uint16_t n, uint8_t q, uint8_t p) {
@@ -85,8 +95,6 @@ void config_source_clock(uint32_t freq_in, uint8_t source_clock, uint8_t m, uint
     return;
 }
 
-
-
 /* Configure system clock */
 void config_system_clock(uint8_t sys_clock_source, uint32_t ahb_prescaler, uint32_t apb1_prescaler, uint32_t apb2_prescaler) {
 
@@ -113,6 +121,18 @@ uint32_t get_sys_clock_freq() {
 
     return HAL_RCC_GetSysClockFreq();
 
+}
+
+/* Returns the HCLK frequency */
+uint32_t get_hclk_freq() {
+
+    return HAL_RCC_GetHCLKFreq();
+}
+
+/* Returns the PCLK1 frequency */
+uint32_t get_pclk_freq() {
+
+    return HAL_RCC_GetPCLK1Freq();
 }
 
 /* Deinit clock */

@@ -70,6 +70,7 @@ void init_configure_gpio_port(port p, uint16_t gpio_num, uint8_t mode, uint8_t p
     return;
 }
 
+/* Set high gpio */
 void set_high_gpio_level(port p, uint16_t gpio_num) {
 
     HAL_GPIO_WritePin(p, gpio_num, GPIO_PIN_SET);
@@ -77,6 +78,7 @@ void set_high_gpio_level(port p, uint16_t gpio_num) {
     return;
 }
 
+/* Set low gpio */
 void set_low_gpio_level(port p, uint16_t gpio_num) {
 
     HAL_GPIO_WritePin(p, gpio_num, GPIO_PIN_RESET);
@@ -84,11 +86,13 @@ void set_low_gpio_level(port p, uint16_t gpio_num) {
     return;
 }
 
+/* Get gpio value */
 uint8_t get_gpio_level(port p, uint16_t gpio_num) {
 
     return HAL_GPIO_ReadPin(p, gpio_num);
 }
 
+/* Toggle gpio */
 void toggle_gpio_level(port p, uint16_t gpio_num) {
 
     HAL_GPIO_TogglePin(p, gpio_num);

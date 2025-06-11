@@ -7,6 +7,7 @@
 
 #include "clock.h"
 #include "gpio.h"
+#include "usart1.h"
 
 /* Main program */
 int main() {

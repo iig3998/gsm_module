@@ -77,6 +77,34 @@ void read_metrics_aht20() {
   return;
 }
 
+/* Configure i2c1 pin */
+void i2c1_config_pin() {
+
+  GPIO_InitTypeDef GPIO_InitStruct_PB8;
+  GPIO_InitTypeDef GPIO_InitStruct_PB9;
+
+  memset(&GPIO_InitStruct_PB8, 0, sizeof(GPIO_InitStruct_PB8));
+  memset(&GPIO_InitStruct_PB9, 0, sizeof(GPIO_InitStruct_PB9));
+
+  GPIO_InitStruct_PB8.Pin = GPIO_PIN_8;
+  GPIO_InitStruct_PB8.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct_PB8.Pull = GPIO_NOPULL;
+  GPIO_InitStruct_PB8.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct_PB8.Alternate = GPIO_AF4_I2C1;
+
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct_PB8);
+
+  GPIO_InitStruct_PB9.Pin = GPIO_PIN_9;
+  GPIO_InitStruct_PB9.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct_PB9.Pull = GPIO_NOPULL;
+  GPIO_InitStruct_PB9.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct_PB9.Alternate = GPIO_AF4_I2C1; // Alternate function
+
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct_PB9);
+
+  return;
+}
+
 
 /* Main program */
 int main() {

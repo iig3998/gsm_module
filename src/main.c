@@ -5,6 +5,9 @@
 #include <stm32f4xx_hal_gpio.h>
 #include <stm32f4xx_hal_cortex.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 #include "clock.h"
 #include "gpio.h"
 #include "usart1.h"

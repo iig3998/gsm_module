@@ -161,7 +161,7 @@ int main() {
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct_PC13);
 
   while (1) {
-    HAL_GPIO_TogglePin (GPIOC, GPIO_PIN_13);
-    HAL_Delay (100);
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+    HAL_Delay(100);
   }
 }

@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "stm32f4xx_hal.h": "c",
-        "stm32f4xx_hal_gpio.h": "c"
+        "stm32f4xx_hal_gpio.h": "c",
+        "stm32f4xx_hal_i2c.h": "c",
+        "stm32f4xx_hal_cortex.h": "c"
     }
 }

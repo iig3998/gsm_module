@@ -153,7 +153,7 @@ int main() {
 
   memset(&GPIO_InitStruct_PC13, 0, sizeof(GPIO_InitStruct_PC13));
 
-  /* COnfigure GPIO13 to drive LED on board */
+  /* Configure GPIO13 to drive LED on board */
   GPIO_InitStruct_PC13.Pin = GPIO_PIN_13;
   GPIO_InitStruct_PC13.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct_PC13.Pull = GPIO_NOPULL;

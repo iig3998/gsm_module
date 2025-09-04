@@ -138,6 +138,8 @@ int i2c1_config(uint32_t freq_clock) {
 /* Main program */
 int main() {
 
+  TaskHandle_t xHandle = NULL;
+
   GPIO_InitTypeDef GPIO_InitStruct_PC13;
 
   HAL_Init();
@@ -160,6 +162,18 @@ int main() {
   GPIO_InitStruct_PC13.Speed = GPIO_SPEED_FREQ_LOW;
 
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct_PC13);
+
+  /* Init i2c 1 */
+  i2c1_config_pin();
+
+  /* Set i2c 1 clock frequency */
+  i2c1_config(100000);
+
+  if(xTaskCreate(read_metrics_aht20, "metrics_aht20", 256, NULL, 2, &xHandle) != pdPASS) {
+    return -1;
+  }
+
+  vTaskStartScheduler();
 
   while (1) {
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);

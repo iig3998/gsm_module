@@ -143,7 +143,12 @@ int main() {
 
   HAL_NVIC_SystemReset();
 
-  __HAL_RCC_GPIOC_CLK_ENABLE();
+  /* Enable clock portA */
+  enable_clock_port_a();
+  /* Enable clock PORTB */
+  enable_clock_port_b();
+  /* Enable clock PORTC */
+  enable_clock_port_c();
 
   memset(&GPIO_InitStruct_PC13, 0, sizeof(GPIO_InitStruct_PC13));
 

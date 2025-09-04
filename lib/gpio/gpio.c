@@ -1,35 +1,5 @@
 #include "gpio.h"
 
-/*
-    * List GPIO available *
-
-    GPIO_PIN_0
-    GPIO_PIN_1
-    GPIO_PIN_2
-    GPIO_PIN_3
-    GPIO_PIN_4
-    GPIO_PIN_5
-    GPIO_PIN_6
-    GPIO_PIN_7
-    GPIO_PIN_8
-    GPIO_PIN_9
-    GPIO_PIN_10
-    GPIO_PIN_11
-    GPIO_PIN_12
-    GPIO_PIN_13
-    GPIO_PIN_14
-    GPIO_PIN_15
-
-    * List PORT available *
-
-    - GPIOA with 16 pins
-    - GPIOB with 16 pins
-    - GPIOC with 16 pins
-    - GPIOD with 16 pins
-    - GPIOE with 16 pins
-    - GPIOH with 1 pin
-*/
-
 /* Enable clock for PORTA */
 void enable_clock_port_a() {
 

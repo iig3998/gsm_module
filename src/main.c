@@ -12,6 +12,9 @@
 #include "clock.h"
 #include "gpio.h"
 #include "usart1.h"
+#include "usart2.h"
+#include "usart6.h"
+
 int __io_putchar(int ch) {
 
     //HAL_UART_Transmit(&huart6, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
